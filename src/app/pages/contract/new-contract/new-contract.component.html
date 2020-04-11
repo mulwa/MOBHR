@@ -1,0 +1,143 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p class="heading">Creating Contract...</p>
+</ngx-spinner>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-12">Contract Details</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="contractForm">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Contract Title</label>
+                <input
+                  type="text"
+                  formControlName="name"
+                  class="form-control"
+                />
+                <div class="error-msg" *ngIf="submitted && f_data.name.errors">
+                  <span [hidden]="f_data.name.errors.errors?.required">
+                    * Contract Title is required
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Salary</label>
+                <input
+                  class="form-control"
+                  type="number"
+                  formControlName="salary"
+                />
+                <div
+                  class="error-msg"
+                  *ngIf="submitted && f_data.salary.errors"
+                >
+                  <span [hidden]="f_data.salary.errors.errors?.required">
+                    * Salary name is required
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Job Position</label>
+                <select class="form-control" formControlName="jobposition">
+                  <option
+                    *ngFor="let postion of positions"
+                    value="{{ postion.id }}"
+                    >{{ postion.name }}</option
+                  >
+                </select>
+                <div
+                  class="error-msg"
+                  *ngIf="submitted && f_data.jobposition.errors"
+                >
+                  <span [hidden]="f_data.jobposition.errors.errors?.required">
+                    * Select Job Position
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Contract Description</label>
+                <textarea
+                  class="form-control textarea"
+                  formControlName="desc"
+                ></textarea>
+              </div>
+              <div class="error-msg" *ngIf="submitted && f_data.desc.errors">
+                <span [hidden]="f_data.desc.errors.errors?.required">
+                  * Enter Job Description
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>start date</label>
+                <input
+                  class="form-control"
+                  type="date"
+                  formControlName="start_date"
+                />
+                <div
+                  class="error-msg"
+                  *ngIf="submitted && f_data.start_date.errors"
+                >
+                  <span [hidden]="f_data.start_date.errors.errors?.required">
+                    * Select Contract start date
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Expiry Date</label>
+                <input
+                  class="form-control"
+                  type="date"
+                  formControlName="expiry_date"
+                />
+              </div>
+              <div
+                class="error-msg"
+                *ngIf="submitted && f_data.expiry_date.errors"
+              >
+                <span [hidden]="f_data.expiry_date.errors.errors?.required">
+                  * Enter Contract Expiry Date
+                </span>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-primary" (click)="onSave()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-bordered">
+          <tr>
+            <th>Requested By</th>
+            <th>Date Requested</th>
+            <th>Type Of leave</th>
+            <th>Explanation</th>
+            <th>Request Status</th>
+          </tr>
+          <tr *ngFor="let item of leaveRequests">
+            <td>{{ item?.employee_name }}</td>
+            <td>{{ item?.leave_date }}</td>
+            <td>{{ item?.leave_type_name }}</td>
+            <td>{{ item?.explanation }}</td>
+            <td>
+              <span *ngIf="item?.approved" class="approved">Approved</span>
+              <span *ngIf="!item?.approved" class="pending">No Approved</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

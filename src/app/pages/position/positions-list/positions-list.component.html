@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="btn btn-primary" *ngIf="!show_form" (click)="toogleForm()">
+      New Position
+    </div>
+  </div>
+</div>
+<app-new-position
+  [showForm]="show_form"
+  (FormEvent)="receiveFormEvent($event)"
+></app-new-position>
+<app-loader *ngIf="loading"></app-loader>
+<div class="row" *ngIf="!loading && positions">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Company Position</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Id
+              </th>
+              <th>
+                Position Name
+              </th>
+              <th>
+                Department
+              </th>
+              <th>
+                Actions
+              </th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let position of positions">
+                <td>
+                  {{ position.id }}
+                </td>
+                <td>
+                  {{ position.name }}
+                </td>
+                <td>
+                  {{ position.department_id_name }}
+                </td>
+                <td>
+                  <button
+                    class="btn btn-warning action-btn"
+                    [routerLink]="['/edit-position', position.id]"
+                    (click)="editPosition(position)"
+                  >
+                    <fa name="edit" size="2x"></fa>
+                  </button>
+                  <button
+                    class="btn btn-secondary action-btn"
+                    (click)="deletePosition(position)"
+                  >
+                    <fa name="trash" size="2x"></fa>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

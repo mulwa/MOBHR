@@ -1,0 +1,68 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Saving...</p>
+</ngx-spinner>
+
+<div class="row" *ngIf="showForm" [@EnterLeave]="'flyIn'">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-12">New Department Details</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="departmentForm">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Department Name</label>
+                <input
+                  type="text"
+                  formControlName="name"
+                  class="form-control"
+                  placeholder="Department Name"
+                />
+                <div class="error-msg" *ngIf="submitted && f_data.name.errors">
+                  <span [hidden]="f_data.name.errors.errors?.required">
+                    * Department name is required
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Department Description</label>
+                <textarea
+                  class="form-control textarea"
+                  formControlName="desc"
+                ></textarea>
+                <div class="error-msg" *ngIf="submitted && f_data.desc.errors">
+                  <span [hidden]="f_data.desc.errors.errors?.required">
+                    * Department Description is required
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-primary" (click)="onSave()">
+              Save
+            </button>
+            <button class="btn btn-secondary" (click)="onCancel()">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+export interface IEmployee {
+  id?: string;
+  password?: string;
+  last_login?: any;
+  is_superuser?: boolean;
+  first_name: string;
+  last_name: string;
+  is_active?: boolean;
+  email?: string;
+  dob?: string;
+  address?: string;
+  gender?: string;
+  marital_status?: string;
+  contact?: string;
+  id_number?: string;
+  nhif_number?: string;
+  nssf_number?: string;
+  emp_has_contract?: string;
+  kra_pin?: string;
+  education?: string;
+  place_of_work?: string;
+  passport_photo?: any;
+  bank_name?: string;
+  bank_branch?: string;
+  bank_account?: string;
+  is_staff?: boolean;
+  emp_status?: string;
+  date_joined?: string;
+  nationality?: string;
+  department?: any;
+  contract?: any;
+  groups?: any[];
+  user_permissions?: any[];
+}

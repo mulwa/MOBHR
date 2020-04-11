@@ -1,0 +1,89 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p class="heading">Saving...</p>
+</ngx-spinner>
+<div class="row" *ngIf="showForm" [@EnterLeave]="'flyIn'">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-12">New Position Details</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="positionForm">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Position Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                />
+                <div class="error-msg" *ngIf="submitted && f_data.name.errors">
+                  <span [hidden]="f_data.name.errors.errors?.required">
+                    * Position name is required
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Department</label>
+                <select class="form-control" formControlName="department_id">
+                  <option
+                    *ngFor="let position of position"
+                    value="{{ position?.id }}"
+                    >{{ position?.name }}</option
+                  >
+                </select>
+                <div
+                  class="error-msg"
+                  *ngIf="submitted && f_data.department_id.errors"
+                >
+                  <span [hidden]="f_data.department_id.errors.errors?.required">
+                    * Please select Department
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Position Description</label>
+                <textarea
+                  class="form-control textarea"
+                  formControlName="description"
+                ></textarea>
+                <div
+                  class="error-msg"
+                  *ngIf="submitted && f_data.description.errors"
+                >
+                  <span [hidden]="f_data.description.errors.errors?.required">
+                    * Position Description is required
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-primary" (click)="onSave()">Save</button>
+            <button class="btn btn-secondary" (click)="onCancel()">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

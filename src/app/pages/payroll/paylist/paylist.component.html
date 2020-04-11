@@ -1,0 +1,43 @@
+<app-loader *ngIf="!processedPayList"></app-loader>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-warning" (click)="exportNssf()">
+            Export Nssf
+          </button>
+          <button class="btn btn-warning" (click)="exportPayroll()">
+            Export Payroll
+          </button>
+          <button class="btn btn-warning" (click)="exportNhif()">
+            Export NHIF
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered">
+        <tr>
+          <th>Employee Id</th>
+          <th>Employee Name</th>
+          <th>Payroll Date</th>
+          <th>Days Worked</th>
+          <th>Gross Salary</th>
+          <th>PAYE</th>
+          <th>Net Salary</th>
+        </tr>
+        <tr *ngFor="let emp of processedPayList">
+          <td>{{ emp?.employee_id }}</td>
+          <td>{{ emp?.employee_full_name }}</td>
+          <td>{{ emp?.payroll_name }}</td>
+          <td>{{ emp?.worked_days }} days</td>
+
+          <td>{{ emp?.gross_pay | currency: "Ksh" }}</td>
+          <td>{{ (emp?.deduction)["paye"] | currency: "Ksh" }}</td>
+          <td>{{ emp?.net_pay | currency: "Ksh" }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

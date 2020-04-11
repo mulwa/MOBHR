@@ -1,0 +1,98 @@
+<app-loader *ngIf="loading"></app-loader>
+
+<div class="card" *ngIf="payslipDetails">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="company">
+          <h6>Mobiticket</h6>
+          <h6>P.O Box 1200 Nairobi</h6>
+          <h6>254707200314</h6>
+        </div>
+        <hr />
+      </div>
+    </div>
+    <div class="employee-details">
+      <div class="row">
+        <div class="col-md-4">
+          <h6>Employee Name</h6>
+        </div>
+        <div class="col-md-4">
+          <p>{{ payslipDetails?.employee_full_name }}</p>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-md-4">
+          <h6>Department</h6>
+        </div>
+        <div class="col-md-4">
+          <p>{{ payslipDetails | json }}</p>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col-md-4">
+          <h6>Payment Period</h6>
+        </div>
+        <div class="col-md-4">
+          <p>{{ payslipDetails?.payroll_name }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h6>Days Worked</h6>
+        </div>
+        <div class="col-md-4">
+          <p>{{ payslipDetails?.worked_days }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h6>Gross Salary</h6>
+        </div>
+        <div class="col-md-4">
+          <p>{{ payslipDetails?.gross_pay | currency: "Ksh" }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <h6>Net Salary</h6>
+        </div>
+        <div class="col-md-4">
+          <p>{{ payslipDetails?.net_pay | currency: "Ksh" }}</p>
+        </div>
+      </div>
+      <!-- <hr /> -->
+    </div>
+    <div class="earnings">
+      <table class="table table-bordered">
+        <tr>
+          <th>Earnings</th>
+          <th>Amount (Ksh)</th>
+        </tr>
+        <tr>
+          <td>Gross Pay</td>
+          <td>{{ payslipDetails?.gross_pay | currency: "Ksh" }}</td>
+        </tr>
+      </table>
+
+      <table class="table table-bordered">
+        <tr>
+          <th>Deductions</th>
+          <th>Amount (Ksh)</th>
+        </tr>
+        <tr *ngFor="let key of keys()">
+          <td>{{ key }}</td>
+          <td>{{ deduction[key] | currency: "Ksh" }}</td>
+        </tr>
+        <tr>
+          <th>Total Deductions</th>
+          <th>{{ getTotalDeduction() | currency: "Ksh" }}</th>
+        </tr>
+      </table>
+    </div>
+    <div class="pay-section">
+      <hr />
+      <h6>Net Pay : {{ payslipDetails?.net_pay | currency: "Ksh" }}</h6>
+    </div>
+  </div>
+</div>

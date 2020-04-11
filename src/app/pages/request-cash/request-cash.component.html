@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="expenseForm">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Request Title</label>
+                <input
+                  type="text"
+                  formControlName="title"
+                  class="form-control"
+                  value=""
+                />
+              </div>
+              <div class="error-msg" *ngIf="submitted && f_data.title.errors">
+                <span [hidden]="f_data.title.errors.errors?.required">
+                  * Request Title is required
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <button class="btn btn-warning" (click)="addExpense()">
+                <fa name="plus" size="2x"></fa> Expense
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div
+                class="form-group"
+                formArrayName="expences"
+                *ngFor="
+                  let expence of expenseForm.get('expences')['controls'];
+                  let i = index
+                "
+              >
+                <div class="row" [formGroupName]="i">
+                  <div class="col-md-5">
+                    <input
+                      type="text"
+                      placeholder="Expense {{ i + 1 }} title"
+                      formControlName="expence"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col-md-5">
+                    <input
+                      type="text"
+                      placeholder="Expense {{ i + 1 }} amount"
+                      formControlName="amount"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col-md-2">
+                    <span class="btn-action" (click)="removeExpence(i)">
+                      <fa name="trash" size="1x"></fa>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="update ">
+              <button
+                type="submit"
+                class="btn btn-primary "
+                (click)="submitRequest()"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

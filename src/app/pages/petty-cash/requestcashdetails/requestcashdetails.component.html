@@ -1,0 +1,98 @@
+<app-loader *ngIf="loading"></app-loader>
+<div class="row" *ngIf="!loading">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="center">
+              <h6>{{ pertyRequest?.title }}</h6>
+              <h6>Date requested : {{ pertyRequest?.date_checked }}</h6>
+              <h6>Requested By: {{ pertyRequest?.employee_name }}</h6>
+            </div>
+            <hr />
+          </div>
+        </div>
+        <table class="table table-bordered">
+          <tr>
+            <th>Description of Item / Service purchased</th>
+            <th>Amount</th>
+          </tr>
+          <tr *ngFor="let key of keys()">
+            <td>{{ key }}</td>
+            <td>{{ requestBudjet[key] | currency: "Ksh" }}</td>
+          </tr>
+          <tr>
+            <th>Total</th>
+            <th>{{ pertyRequest?.total | currency: "Ksh" }}</th>
+          </tr>
+        </table>
+
+        <div class="row">
+          <div class="col-md-4">
+            <p>
+              <b>Status: {{ pertyRequest?.status }}</b>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <div class="col-md-4"></div>
+            <p>
+              <b
+                >Requested By:
+                <span class="underline">{{
+                  pertyRequest?.employee_name
+                }}</span></b
+              >
+            </p>
+          </div>
+
+          <div
+            class="col-md-4"
+            *ngIf="
+              pertyRequest?.status == 'Approved' ||
+              pertyRequest?.status == 'Rejected'
+            "
+          >
+            <p>
+              <b>
+                <span *ngIf="pertyRequest?.status == 'Approved'"
+                  >Approved By:</span
+                >
+                <span *ngIf="pertyRequest?.status == 'Rejected'"
+                  >Rejected By:
+                </span>
+                <span class="underline">{{
+                  pertyRequest?.approved_by
+                }}</span></b
+              >
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="col-md-6"
+            *ngIf="
+              pertyRequest?.status == 'Pending' ||
+              pertyRequest?.status == 'Rejected'
+            "
+          >
+            <button
+              class="btn btn-primary"
+              (click)="updateRequestStatus(pertyRequest?.id, 'Approved')"
+            >
+              Approve
+            </button>
+          </div>
+          <div class="col-md-6" *ngIf="pertyRequest?.status == 'Approved'">
+            <button
+              class="btn btn-warning"
+              (click)="updateRequestStatus(pertyRequest?.id, 'Rejected')"
+            >
+              Reject
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

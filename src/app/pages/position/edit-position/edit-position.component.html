@@ -1,0 +1,68 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Updating...</p>
+</ngx-spinner>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-12">Position Update</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="updatePositionForm">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Position Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Department</label>
+                <select class="form-control" formControlName="department_id">
+                  <option
+                    *ngFor="let position of position"
+                    value="{{ position?.id }}"
+                    >{{ position?.name }}</option
+                  >
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Position Description</label>
+                <textarea
+                  class="form-control textarea"
+                  formControlName="description"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-primary" (click)="onUpdate()">Update</button>
+            <button class="btn btn-secondary" (click)="onCancel()">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

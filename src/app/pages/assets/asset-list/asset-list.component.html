@@ -1,0 +1,98 @@
+<app-return-asset
+  [showReturnForm]="show_return_form"
+  (FormEvent)="receiveReturnFormEvent($event)"
+  [assetData]="asset_to_return"
+></app-return-asset>
+<div class="row">
+  <div class="col-md-12">
+    <div
+      class="btn btn-primary"
+      *ngIf="!show_return_form && !show_form"
+      (click)="toogleForm()"
+    >
+      New Property
+    </div>
+  </div>
+</div>
+<app-new-asset
+  *ngIf="show_form"
+  [showForm]="show_form"
+  (FormEvent)="receiveFormEvent($event)"
+></app-new-asset>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Company Properties</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Id
+              </th>
+              <th>
+                Property Name
+              </th>
+              <th>
+                Serial No
+              </th>
+              <th>
+                Condition
+              </th>
+              <th>
+                Availability Status
+              </th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let asset of assets">
+                <td>
+                  {{ asset.id }}
+                </td>
+                <td>
+                  {{ asset.name }}
+                </td>
+                <td>
+                  {{ asset.serialno }}
+                </td>
+                <td>{{ asset.condition }}</td>
+                <td>
+                  <button
+                    class="btn btn-warning"
+                    *ngIf="asset.available"
+                    [routerLink]="['/assign', asset.id]"
+                  >
+                    Issue
+                  </button>
+                  <button
+                    class="btn btn-secondary"
+                    *ngIf="!asset.available"
+                    (click)="returnAsset(asset)"
+                  >
+                    Return
+                  </button>
+                </td>
+                <td>
+                  <button
+                    class="btn btn-warning action-btn"
+                    [routerLink]="['/update', asset.id]"
+                  >
+                    <fa name="edit" size="2x"></fa>
+                  </button>
+                  <button
+                    class="btn btn-warnin action-btn"
+                    (click)="deleteAssets(asset.id)"
+                  >
+                    <fa name="trash" size="2x"></fa>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

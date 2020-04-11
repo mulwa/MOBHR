@@ -1,0 +1,77 @@
+<app-loader *ngIf="loading"></app-loader>
+<div class="row" *ngIf="!loading && contractList">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">All Contracts</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive table-stripped">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                Employee Name
+              </th>
+              <th>
+                Job Position
+              </th>
+              <th>
+                Salary
+              </th>
+
+              <th>
+                Contract Description
+              </th>
+              <th>
+                Start Date
+              </th>
+              <th>
+                Expiry Date
+              </th>
+              <th>Status</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let contract of contractList">
+                <td>
+                  {{ contract.employee_name }}
+                </td>
+                <td>
+                  {{ contract.position_name }}
+                </td>
+                <td>
+                  {{ contract.salary | currency: "Ksh" }}
+                </td>
+                <td>
+                  {{ contract.desc }}
+                </td>
+                <td>
+                  {{ contract.start_date }}
+                </td>
+                <td>
+                  {{ contract.expiry_date }}
+                </td>
+                <td>
+                  <span *ngIf="contract.status_active" class="active"
+                    >Active</span
+                  >
+                  <span *ngIf="!contract.status_active" class="inactive"
+                    >In Active</span
+                  >
+                </td>
+                <td>
+                  <button
+                    class="btn btn-secondary action-btn"
+                    [routerLink]="['/review-contract', contract.id]"
+                  >
+                    Review
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

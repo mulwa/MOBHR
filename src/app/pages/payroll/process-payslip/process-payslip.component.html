@@ -1,0 +1,125 @@
+<!-- <div class="col-md-8" [@EnterFRTL]="'flyIn'"> -->
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="payrollForm">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Employee Name</label>
+            <input
+              type="text"
+              class="form-control"
+              [disabled]="true"
+              value="{{ employee?.employee_name }}"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Employee Number</label>
+            <input
+              type="text"
+              class="form-control"
+              [disabled]="true"
+              value="{{ employee?.employee }}"
+            />
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Number of working days</label>
+            <input
+              type="number"
+              formControlName="worked_days"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="col-md-6" *ngFor="let item of contractDetails">
+          <div class="form-group">
+            <label>Gross Salary</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="gross_pay"
+              [disabled]="true"
+              value="{{ item?.salary }}"
+            />
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>NSSF Model</label>
+            <div class="radio">
+              <label
+                ><input type="radio" name="optradio" checked />Old model
+              </label>
+            </div>
+            <div class="radio">
+              <label><input type="radio" name="optradio" />New model</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-warning" (click)="addDeduction()">
+            <fa name="plus" size="2x"></fa> deduction
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div
+            class="form-group"
+            formArrayName="deductions"
+            *ngFor="
+              let deduction of payrollForm.get('deductions')['controls'];
+              let i = index
+            "
+          >
+            <div class="row" [formGroupName]="i">
+              <div class="col-md-5">
+                <input
+                  type="text"
+                  placeholder="Deduction {{ i + 1 }} title"
+                  formControlName="deduction"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-md-5">
+                <input
+                  type="text"
+                  placeholder="deduction {{ i + 1 }} amount"
+                  formControlName="amount"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-md-2">
+                <span class="btn-action" (click)="removeDeduction(i)">
+                  <fa name="trash" size="1x"></fa>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-primary" (click)="processPaySlip()">
+          Process Pay Slip
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->

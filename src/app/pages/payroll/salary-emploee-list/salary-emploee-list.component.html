@@ -1,0 +1,35 @@
+<div class="row" [@EnterLeave]="'flyIn'">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <input
+          type="text"
+          class="form-control search-input"
+          placeholder="Search Employee"
+        />
+      </div>
+      <div class="card-body">
+        <ul class="list-group">
+          <li
+            class="list-group-item"
+            *ngFor="let emp of payrollEmployee"
+            (click)="employeeSelected(emp)"
+            [class.highlighted]="emp.employee === currentrow"
+          >
+            <div class="row">
+              <div class="col-md-7">
+                {{ emp.employee_name }}
+              </div>
+              <div class="col-md-5">
+                <span *ngIf="emp.processed" class="pay-slip">Payslip</span>
+                <span *ngIf="!emp.processed" class="g-payslip"
+                  >Generate PaySlip</span
+                >
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

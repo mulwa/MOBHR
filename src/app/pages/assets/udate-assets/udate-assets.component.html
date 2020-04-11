@@ -1,0 +1,95 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p class="heading">Updating Asset Please Wait...</p>
+</ngx-spinner>
+<div class="row">
+  <div class="col-md-12">
+    <div class="btn btn-primary">
+      Back
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-12">Update Property Details</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="assetUpdateForm">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label> Property Name</label>
+                <input
+                  type="text"
+                  formControlName="name"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label> Serial Number</label>
+                <input
+                  type="text"
+                  formControlName="serialno"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Property Condition</label>
+                <select class="form-control" formControlName="condition">
+                  <option value="good">Good</option>
+                  <option value="dead">Dead</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Property note</label>
+                <textarea
+                  class="form-control textarea"
+                  formControlName="other_details"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Availability</label>
+                <select class="form-control" formControlName="available">
+                  <option value="true">Avaliable</option>
+                  <option value="false">Not Avaliable</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-primary" (click)="onUpdate()">Update</button>
+            <button class="btn btn-secondary" (click)="onCancel()">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

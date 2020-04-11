@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Month</label>
+                <select
+                  class="form-control"
+                  [(ngModel)]="selectedPaymentModel"
+                  [ngModelOptions]="{ standalone: true }"
+                >
+                  <option
+                    *ngFor="let payment of paymentOptions"
+                    value="{{ payment?.id }}"
+                    >{{ payment?.month_name }}</option
+                  >
+                </select>
+                <div class="error-msg" *ngIf="submited && isUndefined">
+                  <span>
+                    * Please Select Month
+                  </span>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-md-4">
+              <div class="form-group">
+                <label>Year</label>
+                <input type="text" class="form-control" />
+              </div>
+            </div> -->
+            <div class="col-md-4">
+              <div class="form-group">
+                <button class="btn btn-primary" (click)="search()">
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="row"> -->
+<app-loader *ngIf="loading"></app-loader>
+<!-- </div> -->
+
+<div class="row" *ngIf="!loading && payrollEmployee">
+  <div class="col-md-8"></div>
+  <div class="col-md-4">
+    <button class="btn btn-primary">Filter</button>
+    <button class="btn btn-primary" (click)="showProcessedPaylist()">
+      <span *ngIf="!showProcessedList">All processed payslips</span>
+      <span *ngIf="showProcessedList">Generate Payroll</span>
+    </button>
+  </div>
+</div>
+<app-paylist
+  *ngIf="showProcessedList"
+  [payrollEmployee]="payrollEmployee"
+  [selectePaymentType]="selectedPaymentModel"
+></app-paylist>
+<div class="row" *ngIf="payrollEmployee && !showProcessedList">
+  <div class="col-md-4">
+    <app-salary-emploee-list
+      [payrollEmployee]="payrollEmployee"
+      (employeeEvent)="onEmployeeSelect($event)"
+    ></app-salary-emploee-list>
+  </div>
+  <div class="col-md-8" *ngIf="!employee" [@EnterLeave]="'flyIn'">
+    <div class="card">
+      <div class="card-body">
+        <p>Please Select an employee</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8" *ngIf="employee && !employee.processed">
+    <app-process-payslip
+      (payslipProcessEvent)="receivePayslipEvent($event)"
+      [employee]="employee"
+    ></app-process-payslip>
+  </div>
+
+  <div class="col-md-8" *ngIf="employee && employee.processed">
+    <app-payslip [payslipDetails]="employee"></app-payslip>
+  </div>
+</div>

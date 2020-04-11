@@ -1,0 +1,28 @@
+<app-loader *ngIf="loading"></app-loader>
+<div class="row" *ngIf="!loading && cashRequestList">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-bordered">
+          <tr>
+            <th>Request Title</th>
+            <th>Requested By</th>
+            <th>Date Requested</th>
+            <th>Request Status</th>
+            <th>Total Amount</th>
+          </tr>
+          <tr
+            *ngFor="let item of cashRequestList"
+            [routerLink]="['/petty/details/', item.id]"
+          >
+            <td>{{ item.title }}</td>
+            <td>{{ item.employee_name }}</td>
+            <td>{{ item.date_checked }}</td>
+            <td>{{ item.status }}</td>
+            <td>{{ item.total }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
